@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { PopoverController, NavController, Slides, ModalController, ActionSheetController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../providers/api/api';
+import { ConnexionComponent } from '../../components/connexion/connexion';
 
 /**
  * Generated class for the HomePage page.
@@ -16,14 +17,15 @@ import { ApiProvider } from '../../providers/api/api';
 })
 export class HomePage {
   @ViewChild('SwipedTabsSlider') SwipedTabsSlider: Slides;
-  userid = 1;
+  userid = 0;
   tabs: any = [];
-  Ingredients: any;
+  Ingredients: any = [];
   vue: boolean = true;
   Recettes: any;
+  afficherConnection:boolean = true;
 
   traduire: boolean;
-  ingredients: any;
+  ingredients: any = [];
   categories: any;
   id: number;
   id_cat: number;
@@ -41,7 +43,7 @@ export class HomePage {
   rechercher: boolean;
 
 
-  constructor(public actionDeco: ActionSheetController, public storage: Storage, public api: ApiProvider, public popoverController: PopoverController, public navCtrl: NavController, private modal: ModalController) {
+  constructor(public popoverCtrl: PopoverController, public actionDeco: ActionSheetController, public storage: Storage, public api: ApiProvider, public popoverController: PopoverController, public navCtrl: NavController, private modal: ModalController) {
     this.tabs = ["page1", "page2"];
     this.api.getcategories().subscribe(data => {
       if (data['success']) {
@@ -56,7 +58,9 @@ export class HomePage {
         this.userid = val;
         this.getLivre();
         this.getFrigo();
-      })
+      }).then(()=>{
+        this.afficherConnection = (this.userid == 0);
+      });
     });
     this.id_cat = 2;
   }
@@ -65,8 +69,19 @@ export class HomePage {
     this.id_cat = cat;
   }
 
+  openConnexion() {
+    const popover = this.popoverCtrl.create(ConnexionComponent);
+    popover.onDidDismiss(id_user  => {
+      this.userid = id_user;
+      this.afficherConnection = false;
+      this.getFrigo();
+      this.getLivre();
+    });
+    popover.present();
+  }
+
   getFrigo() {
-    if (this.userid) {
+    if (this.userid > 0) {
       this.api.getFrigoByIdUser(this.userid).subscribe(data => {
         if (data['success']) {
           this.Ingredients = data['result'];
@@ -88,21 +103,32 @@ export class HomePage {
   }
 
   getLivre() {
-    if (this.userid) {
+    if (this.userid > 0) {
       this.api.getLivreByIdUser(this.userid).subscribe(data => {
         if (data['success']) {
           this.Recettes = data['result'];
         }
       });
+    }else{
+      if(this.Ingredients.length > 0){
+        this.api.getLivreTmpUser(this.Ingredients.map(ing => parseInt(ing.MI_Identifier))).subscribe(data => {
+          if(data['success']){
+            this.Recettes = data['result'];
+          }
+        });
+      }
+      
     }
   }
 
   deleteIng(ing) {
-    if (this.userid != null) {
+    if (this.userid > 0) {
       this.api.deleteIng(this.userid, ing.MI_Identifier).subscribe(data => {
         this.text = data['message'];
         this.getFrigo();
       });
+    }else{
+      this.Ingredients.splice(this.Ingredients.indexOf(ing), 1);
     }
   }
 
@@ -112,20 +138,28 @@ export class HomePage {
   }
 
   openProfil() {
-    const modalRecette = this.modal.create('CopiePage', { userid: this.userid });
-    modalRecette.present();
+    if(this.userid > 0){
+      const modalRecette = this.modal.create('CopiePage', { userid: this.userid });
+      modalRecette.present();
+    }
   }
 
   openMP() {
-    const modalRecette = this.modal.create('MealplannerPage', { userid: this.userid });
-    modalRecette.present();
+    if(this.userid > 0){
+      const modalRecette = this.modal.create('MealplannerPage', { userid: this.userid });
+      modalRecette.present();
+    }
   }
 
   magasin() {
-    const modalMagasin = this.modal.create('MagasinPage', { userid: this.userid, id_cat: this.id_cat == 0 ? 2 : this.id_cat });
-    modalMagasin.onDidDismiss(id_cat => {
-      this.id_cat = id_cat;
+    const modalMagasin = this.modal.create('MagasinPage', { userid: this.userid, ingredientsTmp: this.Ingredients, id_cat: this.id_cat == 0 ? 2 : this.id_cat });
+    //Les element de cette object sont definis dans le magasin (id_cat: l'identifiant de la categorie, ingredientsTmp: la liste des ingredients choisis pour une personne non identifié);
+    modalMagasin.onDidDismiss(obj => {
+      this.id_cat = obj.id_cat;
+      this.Ingredients = obj.ingredientsTmp;
+      console.log(this.Ingredients);
       this.getFrigo();
+      this.getLivre();
     });
     modalMagasin.present();
   }
@@ -140,23 +174,25 @@ export class HomePage {
   }
 
   presentDeco() {
-    let actionSheet = this.actionDeco.create({
-      buttons: [
-        {
-          text: 'Deconnexion',
-          role: 'destructive',
-          handler: () => {
-            this.storage.set('id_user', 0);
-            this.navCtrl.setRoot('LoginPage');
+    if(this.userid > 0){
+      let actionSheet = this.actionDeco.create({
+        buttons: [
+          {
+            text: 'Deconnexion',
+            role: 'destructive',
+            handler: () => {
+              this.storage.set('id_user', 0);
+              window.location.reload();
+            }
+          }, {
+            text: 'Annuler',
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
+        ]
+      });
     actionSheet.present();
+    }
   }
 }

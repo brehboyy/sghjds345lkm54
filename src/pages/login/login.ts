@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../providers/api/api';
 

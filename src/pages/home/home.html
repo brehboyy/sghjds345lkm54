@@ -7,9 +7,9 @@
 <ion-header>
 	<ion-navbar color="tabs1">
 		<ion-row class="headerMenu">
-			<ion-icon item-left color="light" name="custom-power" (Tap)="presentDeco()"></ion-icon>
+			<ion-icon item-left color="light" name="custom-power" *ngIf="!afficherConnection" (Tap)="presentDeco()"></ion-icon>
 			<ion-title text-center>Mealcheck</ion-title>
-			<ion-icon class="headerIcon" item-right name="custom-person" color="light" (click)="openConnexion()"></ion-icon>
+			<ion-icon class="headerIcon" item-right name="custom-person" *ngIf="afficherConnection" color="light" (click)="openConnexion()"></ion-icon>
 		</ion-row>
 	</ion-navbar>
 </ion-header>

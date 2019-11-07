@@ -8,20 +8,26 @@ import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
 import { ApiProvider } from '../providers/api/api';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConnexionComponent } from '../components/connexion/connexion';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
-    MyApp
+    MyApp,
+    ConnexionComponent
   ],
   bootstrap: [IonicApp],
   providers: [
