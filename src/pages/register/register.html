@@ -1,0 +1,36 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content class="content">
+  <h1 color="light" class="titre">S'inscrire</h1>
+  <form [formGroup]="formgroup" class="box">
+    <ion-list>
+      <ion-item class="item">
+        <ion-input type="text" formControlName="login" placeholder="Login"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!login.valid && login.touched">
+        <ion-item text-wrap class="word"> *Le nom d'utilisateur doit contenir moins de 20 caractères</ion-item>>
+      </ion-item>
+      <ion-item class="item">
+        <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!formgroup.controls.email.valid && email.touched">
+        <p class="word"> *Email mauvais format</p>
+      </ion-item>
+      <ion-item class="item">
+        <ion-input type="password" formControlName="password" placeholder="Mot de passe"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!password.valid && password.touched">
+        <ion-item text-wrap class="word"> *Le mot de passe doit contenir entre 8 et 20 caractères</ion-item>>
+      </ion-item>
+    </ion-list>
+    <button ion-button round color="primary" (click)="goToLogin()">Enregistrer</button>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-icon name="custom-back" color="light" (click)="back()"></ion-icon>
+</ion-footer>

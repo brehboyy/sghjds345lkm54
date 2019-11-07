@@ -1,0 +1,46 @@
+<!--
+  Generated template for the MealplannerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>	
+	<ion-item-divider (click)="closeView()">
+ 	  	<ion-icon item-left name="custom-back"></ion-icon>
+	    <ion-label text-align="left">retour</ion-label> 		
+	</ion-item-divider >
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-item>
+  <ion-icon name="arrow-dropleft" item-left (Tap)="jourSuivant(false)"></ion-icon>
+  <ion-label class="Today">{{aujourdhui}}</ion-label>
+  <ion-icon name="arrow-dropright" item-right (Tap)="jourSuivant(true)"></ion-icon>
+</ion-item>
+
+<ion-list>
+    <ion-item *ngFor="let mom of moments">
+    	<ion-icon item-left name="custom-{{mom}}"></ion-icon>
+      <h1>{{mom}}</h1>
+      <ion-item-sliding *ngFor="let repas of mealplanner | filter : 'moment' : mom">
+        
+        <ion-item>
+          <ion-avatar item-start>
+            <img src={{repas.REC_PhotoUrl}} >
+              </ion-avatar>
+            <h2>{{repas.REC_Title}}</h2>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="bleu-app">
+            <ion-icon name="eye" color="light" (click)="openDetails(repas.REC_Identifier)"></ion-icon>
+          </button>
+          <button ion-button color="danger">
+            <ion-icon name="trash" color="light" (click)="deleteRepas(repas)"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item>
+  </ion-list>
+</ion-content>

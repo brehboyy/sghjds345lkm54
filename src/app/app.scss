@@ -14,3 +14,177 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+ion-icon {
+    &[class*="custom-"] {
+        mask-position: 50% 50%;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1em;
+      height: 1em;
+    }
+  
+    &[class*="custom-calendar"] {
+      mask-image: url(../assets/icons/calendar.svg);
+    }
+    &[class*="custom-person"] {
+      mask-image: url(../assets/icons/person.svg);
+    }
+    &[class*="custom-prev-arrow"] {
+      mask-image: url(../assets/icons/back.svg);
+    }
+    &[class*="custom-next-arrow"] {
+      mask-image: url(../assets/icons/next.svg);
+    }
+    &[class*="custom-power"] {
+      mask-image: url(../assets/icons/power-button.svg);
+    }
+    &[class*="custom-add"] {
+      mask-image: url(../assets/icons/add.svg);
+    }
+    &[class*="custom-forks"] {
+      mask-image: url(../assets/icons/cutlery.svg);
+    }
+    &[class*="custom-matin"] {
+      mask-image: url(../assets/icons/sunrise.svg);
+    }
+    &[class*="custom-midi"] {
+      mask-image: url(../assets/icons/knife-fork-and-plate.svg);
+    }
+    &[class*="custom-collation"] {
+      mask-image: url(../assets/icons/chocolate.svg);
+    }
+    &[class*="custom-dinner"] {
+      mask-image: url(../assets/icons/night.svg);
+    }
+    &[class*="custom-soir"] {
+      mask-image: url(../assets/icons/night.svg);
+    }
+    &[class*="custom-cancel"] {
+      mask-image: url(../assets/icons/cancel.svg);
+    }
+    &[class*="custom-book"] {
+      mask-image: url(../assets/icons/open-book.svg);
+    }
+    &[class*="custom-vegetables"] {
+      mask-image: url(../assets/icons/picnic-basket.svg);
+    }
+    &[class*="custom-back"] {
+    mask-image: url(../assets/icons/back-arrow.svg);
+    }
+    &[class*="custom-search"] {
+    mask-image: url(../assets/icons/search.svg);
+    }
+    &[class*="custom-1"] {
+      mask-image: url(../assets/icons/carrot.svg);
+    }
+    &[class*="custom-7"] {
+      mask-image: url(../assets/icons/fat.svg);
+    }
+    &[class*="custom-fish"] {
+      mask-image: url(../assets/icons/fish.svg);
+    }
+    &[class*="custom-fridge"] {
+      mask-image: url(../assets/icons/fridge.svg);
+    }
+    &[class*="custom-gluten"] {
+    mask-image: url(../assets/icons/gluten.svg);
+    }
+    &[class*="custom-10"] {
+    mask-image: url(../assets/icons/milk.svg);
+    }
+    
+  
+  
+    &[class*="custom-2"] {
+      mask-image: url(../assets/icons/cheese.svg);
+      }
+      &[class*="custom-5"] {
+      mask-image: url(../assets/icons/apple.svg);
+      }
+      &[class*="custom-6"] {
+        mask-image: url(../assets/icons/meat.svg);
+      }
+      &[class*="custom-3"] {
+        mask-image: url(../assets/icons/peanuts.svg);
+      }
+      &[class*="custom-8"] {
+        mask-image: url(../assets/icons/shrimp.svg);
+      }
+      &[class*="custom-9"] {
+      mask-image: url(../assets/icons/flour.svg);
+      }
+      &[class*="custom-11"] {
+      mask-image: url(../assets/icons/sauces.svg);
+      }
+      &[class*="custom-12"] {
+        mask-image: url(../assets/icons/shopping-bag.svg);
+        }
+      &[class*="custom-4"] {
+          mask-image: url(../assets/icons/seasoning.svg);
+          }
+  }
+  ion-modal {
+        &.my-modal-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+  
+            ion-backdrop {
+                visibility: visible;
+            }
+  
+            .modal-wrapper {
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                overflow: auto;
+                width: auto;
+                height: auto;
+                left: auto;
+                top: auto;
+                contain: content;
+  
+                max-width: 70%;
+                max-height: 70%;
+  
+                border-radius: 2px;
+                box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  
+                > .ion-page {
+                    position: relative;
+                    display: block;
+                    width: auto;
+                    height: auto;
+                    contain: content;
+                    box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+                }
+            }
+  
+            &.my-stretch {
+                .modal-wrapper {
+                    overflow: hidden;
+                    width: 100%;
+                    height: 100%;
+  
+                    > .ion-page {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+  
+        &.my-fullscreen {
+            .modal-wrapper {
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }   
+    }

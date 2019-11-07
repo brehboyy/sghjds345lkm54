@@ -1,5 +1,13 @@
 {
-  "name": "Mealcheck3",
-  "integrations": {},
-  "type": "ionic-angular"
+  "name": "Mealcheck",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://cors.api.com/api"
+    }
+  ]
 }

@@ -1,0 +1,13 @@
+page-mealplanner {
+    .Today{
+		text-align: center;
+		font-size: 30px;
+		font-family: 'Montserrat-Bold';
+		color:blue;
+	}
+
+	.listRepas {
+		height: 65vh;
+		overflow-y: auto;
+	}
+}

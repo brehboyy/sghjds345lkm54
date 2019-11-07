@@ -1,0 +1,32 @@
+<ion-content class="main-view">
+  <div class="overlay" (click)="dismiss()"></div>
+  <div class="modal_content">
+    <ion-row class='row-icons'>
+    <ion-item class='icons'>
+      <ion-icon item-left #matin name="custom-matin" (click)=select(0) color={{buttonColor[0]}}></ion-icon>
+      <ion-icon item-left name="custom-midi" #midi (click)=select(1) color={{buttonColor[1]}}></ion-icon>
+      <ion-icon item-left name="custom-collation" #coll (click)=select(2) color={{buttonColor[2]}}></ion-icon>
+      <ion-icon item-left class="custom-dinner" #soir (click)="select(3)" color={{buttonColor[3]}}></ion-icon>
+    </ion-item>
+  </ion-row>
+  <div  text-center>
+    <ion-item-divider class='container'>
+
+    <ion-label class='pick'>Date :</ion-label>
+    <p><br></p>
+    <ion-datetime 
+      [(ngModel)]='value' 
+      (ngModelChange)="getDate()"
+      display-format="DDDD MM YYYY" 
+      dayShortName="dim, lun, mar, mer, jeu, ven, sam"
+      ></ion-datetime>
+
+    
+  </ion-item-divider>
+  </div>
+  <div text-center>
+    <button ion-button [disabled]="colorBtn" color='primary' class="btn" #btn (click)="addValider()">Ajouter</button>
+    </div>
+  </div>
+
+</ion-content>

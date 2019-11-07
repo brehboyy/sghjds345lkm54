@@ -10,7 +10,7 @@ $font-path: "../assets/fonts";
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
-
+$fab-size: 70px; //Change value to whatever size you want
 
 @import "ionic.globals";
 
@@ -38,8 +38,26 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  tabs1:      #DF7C40,
+  violett:    #621295,
+  plus: rgb(149, 250, 149),
+  background-blue: #366ed8
 );
+
+$background: #0e4c9e;
+$buttoncolor1 : #32db64;
+$buttoncolor2 : red;
+$tabs1background: #DF7C40;
+$tabs2background: yellow;
+$headerPrinc: #DF7C40;
+$headerModal: purple;
+$violet : #621295;
+$redt: #c40b13;
+$carteFrigo: #222;
+$carteRecette: green;
+$backgroundCategorie: #6881B4;
+$peche:#DF7C40;
 
 
 // App iOS Variables
@@ -86,3 +104,22 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@font-face{
+	font-family: "Montserrat";
+	src:url('../assets/fonts/Montserrat-Regular.ttf');
+}
+@font-face{
+	font-family: "Montserrat-Bold";
+	src:url('../assets/fonts/Montserrat-Bold.ttf');
+}
+@font-face{
+	font-family: "Montserrat-ExtraBold";
+	src:url('../assets/fonts/Montserrat-ExtraBold.ttf');
+}
+@font-face{
+	font-family: "Montserrat-SemiBold";
+	src:url('../assets/fonts/Montserrat-SemiBold.ttf');
+}
+* {
+    font-family: 'Montserrat';
+}
