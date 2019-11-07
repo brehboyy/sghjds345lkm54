@@ -29,7 +29,7 @@ export class RecettePage {
   glucides: any;  //`REC_TOTALCARBS`,
   proteines: any;  //`REC_PROTEIN`,
   instructions: any;  //`REC_INSTRUCTIONS` 
-
+  activeMealPops:boolean;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public view: ViewController,
@@ -37,10 +37,16 @@ export class RecettePage {
     public popoverController: PopoverController,
     private modal: ModalController,
     public api: ApiProvider,
+    public storage: Storage,
     //private iab: InAppBrowser
   ) {
     this.recette = [];
     this.getRecette();
+    storage.ready().then(() => {
+      storage.get('id_user').then((val) => {
+        this.activeMealPops = (val > 0);
+      })
+    });
 
   }
 

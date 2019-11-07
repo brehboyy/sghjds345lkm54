@@ -1,0 +1,32 @@
+<!-- Generated template for the ConnexionComponent component -->
+<form [formGroup]="formgroup">
+  <h1>Login</h1>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Identifiant</ion-label>
+      <ion-input type="text" formControlName="login" aria-placeholder="Identifiant"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formgroup.controls.login && login.touched">
+      <p> *Le login doit contenir moins de 20 caractère</p>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password" aria-placeholder="Mot de passe"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formgroup.controls.password && password.touched">
+      <p class="word"> *Le mot de passe doit contenir entre 8 et 20 caractère</p>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button color="primary" (click)="goToHome()" item-left>Connexion</button>
+      <button ion-button clear color="primary" (click)="goToRegister()" item-left>S'inscrire</button>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button clear color="light" (click)="goToForgotpassword()">Mot de passe oublié ?</button>
+    </ion-item>
+  
+  </ion-list>
+</form>

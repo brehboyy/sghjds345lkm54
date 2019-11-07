@@ -59,6 +59,15 @@ export class MagasinPage {
     this.api.getMagasinByIdUser(this.userid).subscribe(data => {
       if(data['success']){
         this.ingredients = data['result'];
+        if(this.userid == 0){
+          let lstIngTmp = this.navParams.get('ingredientsTmp');
+          console.log(lstIngTmp);
+          for(let i = 0; i < lstIngTmp.length; i++){
+            if(this.ingredients.filter(ing => ing.MI_Identifier == lstIngTmp[i].MI_Identifier).length > 0){
+              this.ingredients.filter(ing => ing.MI_Identifier == lstIngTmp[i].MI_Identifier)[0].checked = true;
+            }
+          }
+        }
         this.ingredientsSave = this.ingredients;
       }
     });
@@ -108,13 +117,15 @@ export class MagasinPage {
   }
 
   addIngredient() {
-    for (let i = 0; i < this.ingredients.length; i++) {
-      if (this.ingredients[i].checked == true) {
-        this.ajouter(this.ingredients[i].MI_Identifier);
-        //this.toastAjoutIng(ingredients[i]);
+    if(this.userid > 0){
+      for (let i = 0; i < this.ingredients.length; i++) {
+        if (this.ingredients[i].checked == true) {
+          this.ajouter(this.ingredients[i].MI_Identifier);
+          //this.toastAjoutIng(ingredients[i]);
+        }
       }
     }
-    this.view.dismiss(this.id_cat);
+    this.view.dismiss({'id_cat' : this.id_cat, 'ingredientsTmp' : this.ingredients.filter(ing => ing.checked)});
   }
   ajouter(id_ing) {
     if (this.userid != null) {

@@ -96,6 +96,7 @@ export class ApiProvider {
     };
     return this.http.post(this.baseUrl + 'recette/getLivreByIdUserIdIng.php', JSON.stringify(dayta), requestOptions);
   }
+  
   getRecette(recetteId) {
     var headers = new HttpHeaders();
    
@@ -116,6 +117,17 @@ export class ApiProvider {
     };
     var dayta = { id_user: userId };
     return this.http.post(this.baseUrl + 'recette/getLivreByIdUser.php', JSON.stringify(dayta), requestOptions);
+  }
+
+  getLivreTmpUser(listIding) {
+    var headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json;charset=utf-8;charset=utf-8');
+    const requestOptions = {
+      headers: headers
+    };
+    var dayta = { listIngId: listIding };
+    console.log(JSON.stringify(dayta));
+    return this.http.post(this.baseUrl + 'recette/getLivreTmpUser.php', JSON.stringify(dayta), requestOptions);
   }
   //--------------------------- 
 
